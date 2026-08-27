@@ -1,0 +1,7 @@
+1 - Let’s get started on our Slack app first. Go to api.slack.com/apps and click Create New App.
+2 - edit json 
+3 - create the app and het bot and app tokens
+4 - openclaw config
+5 - slack - add the token ids
+6 - openclaw gateway restart
+7 - optional - openclaw pairing approve slack 423657

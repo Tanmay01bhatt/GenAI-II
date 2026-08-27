@@ -1,0 +1,16 @@
+1 - Open PowerShell as Administrator
+2 - wsl --install
+3 - Restart system
+4 - Open your Ubuntu terminal
+5 - Run :
+	sudo tee /etc/wsl.conf >/dev/null <<'EOF'
+	[boot]
+	systemd=true
+	EOF
+6 - Restart WSL : wsl --shutdown
+7 - reopen the Ubuntu app :
+8 - systemctl --user status
+9 - node --version
+10 - intall openclaw : curl -fsSL https://openclaw.ai/install.sh | bash
+
+11 - openclaw onboard

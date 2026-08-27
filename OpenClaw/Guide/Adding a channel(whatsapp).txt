@@ -1,0 +1,17 @@
+1 - nano ~/.openclaw/config.yaml
+2 - paste :
+
+{
+  channels: {
+    whatsapp: {
+      dmPolicy: "pairing",
+      allowFrom: ["+919876543210"],   // ← your number here
+      groupPolicy: "allowlist",
+      groupAllowFrom: ["+919876543210"],  // ← same number, or others you trust
+    },
+  },
+}
+
+3 - save and exit (ctrl+s and ctrl+e)
+
+4- openclaw channels login --channel whatsapp

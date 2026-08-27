@@ -1,0 +1,3 @@
+The skills directory on your machine at ~/.openclaw/workspace/skills/ is where everything you install ends up. 
+
+You can also customise any skill by creating a file at ~/.openclaw/skills/<name>/SKILL.md.

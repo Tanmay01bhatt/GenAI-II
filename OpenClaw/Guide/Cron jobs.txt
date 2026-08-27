@@ -1,0 +1,56 @@
+1 - Jobs are stored at ~/.openclaw/cron/jobs.json and run history is logged per-job. 
+
+2 - If your Gateway is running, your cron jobs are running.
+
+3 - create a cron job:
+
+A : ask you agent : “Set up a cron job that runs every morning at 8am and sends me a summary of my open GitHub PRs on WhatsApp.”
+
+B : UI :  You can also use the Control UI dashboard if you prefer a visual interface. Simply open the Gateway dashboard in your 
+	browser, navigate to the Cron section, and create a job by filling in the schedule, prompt, session mode, and delivery target
+
+C : CLI :  
+
+openclaw cron add \\
+  --name "Morning PR check" \\
+  --cron "0 8 * * *" \\      --->  standard cron expression, runs at 8 a.m. every day.
+  --tz "America/New_York" \\  tz --->  tells to use your local timezone,
+  --session isolated \\
+  --message "Check my open GitHub PRs and summarise any new comments or review requests." \\
+  --announce \\  ---> delivers the output to a messaging channel.
+  --channel whatsapp \\
+  --to "+15551234567"
+
+
+eg : Reminder in 20 minutes: 
+
+openclaw cron add \\
+  --name "Meeting follow-up" \\
+  --at "20m" \\
+  --session main \\
+  --system-event "Remind me to send the follow-up email from this morning's meeting." \\
+  --wake now \\
+  --delete-after-run
+
+eg : Weekly deep analysis: 
+
+4 - Listing your jobs : openclaw cron list
+
+5 - Run a job immediately : openclaw cron run <jobId>
+
+6 - Checking the run history : openclaw cron runs --id <jobId> --limit 20
+
+7 - Editing an existing job : prmopt change -> openclaw cron edit <jobId> --message "Updated prompt"
+
+			  model change ->   openclaw cron edit <jobId> --model "opus" --thinking high 		
+
+8 - Disabling a job without deleting it : openclaw cron edit <jobId> --enabled false
+    Enable it back : openclaw cron edit <jobId> --enabled true
+
+9 - Deleting a job : openclaw cron remove <jobId>
+
+10** - send a one-off message to your agent without creating a persistent job : openclaw system event --mode now --text "Check if there are any urgent Slack messages I missed."
+** triggers an immediate heartbeat with that message injected **
+
+
+Is cron enabled? Run openclaw status to confirm. It can be disabled via config or the OPENCLAW_SKIP_CRON=1 env variable.
