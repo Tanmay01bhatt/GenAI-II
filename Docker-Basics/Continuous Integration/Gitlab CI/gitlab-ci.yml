@@ -1,0 +1,24 @@
+image:
+  name: docker/compose:1.29.0
+
+services:
+  - docker:dind
+
+stages:
+  - test
+  - store
+
+test_job:
+  stage: test
+  script:
+    - docker-compose up -d --build
+    - docker-compose exec -T app pytest .
+
+build_push_to_registry_job:
+  only:
+    - master
+  stage: store
+  script:
+    - docker login -u ${DOCKER_USERNAME} -p ${DOCKER_TOKEN}
+    - docker build -t abiodunjames/example-app .
+    - docker push abiodunjames/example-app

@@ -1,0 +1,7 @@
+### file: docker-compose.override.yml
+
+version: "3.7"
+services:
+  ui:
+    ports:
+      - 7070:80

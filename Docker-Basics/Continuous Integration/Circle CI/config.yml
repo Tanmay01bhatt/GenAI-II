@@ -1,0 +1,46 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - run:
+          name: Start the test environment
+          command: docker-compose  up -d --build
+      - run:
+          name: Run tests
+          command: docker-compose exec app pytest .
+
+  build_push_to_registry:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - run:
+          name: login to hub.docker.com
+          command: echo ${DOCKER_TOKEN} | docker login --username ${DOCKER_USERNAME} --password-stdin
+      - run:
+          name: Build docker image
+          command: docker build -t abiodunjames/example-app .
+      - run:
+          name: Push docker image
+          command: docker push abiodunjames/example-app
+
+workflows:
+  version: 2
+  test_build_and_push_to_registry:
+    jobs:
+      - test
+      - build_push_to_registry:
+          name: Buid and push to docker registry
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

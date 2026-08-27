@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=linkapp
+  app:
+    image: abiodunjames/shorturl-backend:latest
+    ports:
+      - 3000:3000
+    environment:
+      - DATABASE_URI=postgresql://user:password@db/linkapp
+    depends_on: 
+      - db
+  ui:
+      image: abiodunjames/shorturl-frontend:latest
+      ports:
+        - 8080:80
+
+volumes:
+  postgres_data:

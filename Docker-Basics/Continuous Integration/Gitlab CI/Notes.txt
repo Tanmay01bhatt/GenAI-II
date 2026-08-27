@@ -1,0 +1,41 @@
+GitLab itself is an open DevOps platform delivered as a single application. We’ll work with one of GitLab’s features: CI/CD pipelines.
+
+1 - Pipelines
+
+A pipeline is composed of jobs that execute in stages. A pipeline is primarily composed of jobs and stages. GitLab CI groups jobs in stages.
+All the jobs in a stage are executed in parallel , and if they all succeed, the pipeline moves to the next stage. If one of the jobs fails, the next stage isn’t usually executed.
+
+2 - Jobs
+
+A job is a specific thing we want to do. We might have a job to compile and minify our software and another job to deploy it to the production environment. On a high level, the job defines what must be accomplished.
+
+3 - Stages
+
+If jobs define what needs to be done, stages specify when. Stages determine when the job should run. We may have a deploy stage after test stage. Stages help control job execution.
+
+4 - Runners
+
+Runners run the jobs we have defined.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The .gitlab-ci.yml file
+The .gitlab-ci.yml file is a YAML file that contains a pipeline configuration. It’s stored at the repository’s root. On any push to the repository, GitLab looks for the .gitlab-ci.yml file and starts jobs on runners according to the contents of the file for that commit.
+
+On a high level, .gitlab-ci.yml looks like this:
+
+image: ubuntu:latest
+
+stages:
+  - stage1
+  - stage2
+
+
+job1:
+  stage: stage1
+  script:
+    - echo "Hello World"   
+job2:
+  stage: stage2
+  script:
+    - echo "Hello World 2"

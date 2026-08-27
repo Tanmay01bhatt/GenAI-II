@@ -1,0 +1,12 @@
+If we want to override any configuration in the base configuration (docker-compose.yml) in another environment,
+ we create a docker-compose.override.yml, which contains the override configuration.
+
+In this case :
+
+A -  we wish to override the ui service’s mapped port 
+
+override the container’s port 80 to port 7070 on the host instead of mapping it to port 8080.
+
+B - Add a new service 
+
+In addition to overriding existing configurations, we can add an entirely new service in the docker-compose.override.yml

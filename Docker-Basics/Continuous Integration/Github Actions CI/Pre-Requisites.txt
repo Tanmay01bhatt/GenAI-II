@@ -1,0 +1,34 @@
+1 - Define CI requirements
+First, the CI workflow must meet the following requirements:
+
+- The CI should be triggered only when a commit is pushed to the master branch or when a pull request is merged to the master branch.
+- The CI should build a Docker image of the application.
+- Automated tests should run to ensure that new changes don’t break existing features. If a test fails, the build should fail.
+
+Finally, if previous steps succeed, the built Docker image should be pushed to a Docker registry.
+
+2 - Take care of external dependencies
+There are two external dependencies from the requirements above:
+
+(A) : Docker image repository: To push the Docker image to a registry, we need to create an image repository for the image.
+
+(B) : CI access credentials: For the CI to be able to push an image to a repository, it needs to be authenticated with valid credentials.
+
+3 - Create a Docker image repository
+
+4 - Generate the Docker Hub access token
+
+5 - Import Docker Hub access credentials as GitHub secrets
+
+	On GitHub, go to the code repository.
+	Under the repository name, click on “Settings.”
+	In the left sidebar, click on “Secrets.”
+	Click on the “New Repository Secret” button.
+	Type DOCKER_USERNAME as the secret’s name and our Docker Hub username as the value.
+	Create the second secret.
+	Type DOCKER_TOKEN as the secret’s name and the Docker access token created earlier as the value.
+
+6 - Create a workflow
+The first step is to create a file for the workflow at .github/workflows/ci.yml.
+
+We can name our actions anything, but it has to be a YAML file. (in this case : index.yml)

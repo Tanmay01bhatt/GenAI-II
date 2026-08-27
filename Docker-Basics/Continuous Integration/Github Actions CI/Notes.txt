@@ -1,0 +1,60 @@
+GitHub Actions is GitHub’s owned CI/CD and is well-integrated with GitHub.
+
+GitHub Actions allows us to create workflows that can be used to build or compile, test, and deploy our code within our repository.
+
+Components :
+
+1 - Events
+
+In GitHub Actions, everything starts with an event. An event is an action or activity that triggers a workflow.
+It could be a commit action, a pull request action, a merge action, a comment action, and so on.
+
+2 - Workflow
+
+An event triggers something called a workflow. We can think of workflow as automated instructions that we have configured. It’s a combination of one or more jobs. 
+A workflow to build a Docker image for an application could begin from building the application, running unit tests, running end-to-end tests, tagging, and pushing the image to a Docker registry.
+
+3 - Jobs
+
+A job is any task we want to do. It may contain one or more steps that run on the same runners.
+
+4 - Steps
+
+A step is a task that can run commands in a job. Suppose we have a job to read a book. The steps to reading that book could be as follows:
+
+Search for the book.
+Buy the book.
+Receive the book delivery.
+Open the book.
+Read the book.
+In GitHub Actions, a step can be either an action or a shell command.
+
+5 - Actions
+
+Actions are standalone commands combined into steps to create a job. We can create our own action, or we can use actions created by the community.
+
+6 - Runners
+
+We can think of a runner as a server with GitHub Actions installed that runs our jobs. It listens for jobs available, runs one at a time, reports the progress, and logs and sends results back to GitHub.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+On a high level, a GitHub action looks like this:
+
+name: greet-github-action
+on: [push]
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Hello world!'
+name: This is the name of our action.
+on: This specifies the action that should trigger the workflow.
+jobs: These are the things we want to perform or do.
+
+
+GitHub actions reside in the .github/workflows directory, and we can create as many actions as possible.
+
+- .github
+  |- workflows
+    |- action1.yml
+    |- action2.yml

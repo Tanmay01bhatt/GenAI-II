@@ -1,0 +1,31 @@
+Circle CI is a cloud-based continuous integration platform that automates development processes. With Circle CI, the continuous integration 
+and deployment are orchestrated through a single file called config.yml in a folder called .circleci at the root folder of our repository.
+
+1 - Project
+
+A project in Circle CI is the repository we want to configure a pipeline for. This takes the same name as the name of our project in a GitHub repository.
+
+2 - Configuration
+
+A project configuration is the YAML file .circleci/config.yml that contains the definition of the CI pipelines that Circle CI uses to execute our project. Within a Circle CI configuration, there are steps, jobs, and workflows.
+
+3 - Steps
+
+A step is a command we want to execute, such as installing dependencies, building a Docker image, or running a shell script.
+
+4 - Jobs
+
+A job is a combination of one or more steps. It’s responsible for running a series of steps that perform a command.
+
+5 - Workflows
+
+Having steps and jobs isn’t enough; it’s also important to be able to control the order at which jobs run. We also need to know what to do when a job fails. The workflow is used to orchestrate multiple jobs.
+
+6 - Orbs
+
+Orbs are reusable packages of the YAML configuration that condense repeated pieces of config into a single line of code. We can use any of the available orbs from the orbs registry, or we can create our own.
+
+7 - Executors
+
+Executors are runners that run our jobs. Each separate job defined within our config will run in a unique executor. An executor can be a Docker container or a virtual machine running Linux, Windows, or macOS.
+

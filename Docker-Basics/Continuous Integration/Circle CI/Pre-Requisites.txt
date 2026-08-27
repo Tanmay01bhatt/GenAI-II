@@ -1,0 +1,30 @@
+First, the CI workflow must meet the following requirements:
+
+1 - The CI should be triggered only when a commit is pushed to the master branch or when a pull request is merged to the master branch.
+2 - The CI should build a Docker image of the application.
+3 - Automated tests should run to ensure that new changes don’t break existing features. If a test fails, the build should fail.
+4 - Finally, if previous steps succeed, the built Docker image should be pushed to a Docker registry.
+
+There are two external dependencies from the requirements above:
+
+(A) : Docker repository: To push the Docker image to a registry, we need to create an image repository for the image.
+(B) : Access credentials: For the CI to be able to push to a repository, it needs to be authenticated with valid credentials.
+
+1 - Create a Docker image repository
+
+2 - Generate the Docker Hub access token
+
+3 - Create a project in Circle CI
+	To create a project in Circle CI, we follow the steps below:
+
+	Log in to Circle CI with our GitHub account.
+	Click on “Add a project”.
+	Select the repository we want to add and follow the instructions.
+
+4 - Create Docker Hub Access Credentials as GitHub Secrets
+	
+	Click on our project and click on the “Project Setting” at the right pane.
+	From the left navigation menu, click on “Add environment variables.”
+	Enter DOCKER_USERNAME as the name of the variable and the Docker Hub username as the value.
+	Add another environment variable.
+	Type in DOCKER_TOKEN as the name of the variable and the Docker access token created earlier as the value.

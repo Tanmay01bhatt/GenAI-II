@@ -1,0 +1,27 @@
+services:
+  - docker
+
+env:
+  - DOCKER_USERNAME=abiodunjames
+
+before_install:
+  - docker-compose  up -d --build
+  - echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+
+script: echo "Running jobs ..."
+
+jobs:
+  include:
+    - stage: "Tests"               
+      name: "Unit Tests"
+      script: docker-compose exec app pytest .
+    - stage: "Tagging"
+      name: "Tag Image"
+      script: docker build -t abiodunjames/example-app .
+    - stage: "Push"
+      name: "Push to Docker Registry"
+      script: docker push abiodunjames/example-app
+
+after_script:
+  - docker-compose down

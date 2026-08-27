@@ -1,0 +1,23 @@
+While working with multiple environments, we can define environment-specific configurations in their own compose files. 
+
+The docker-compose.yml file serves as the base configuration that can contain shared configurations. 
+
+The docker-compose.dev.yml file serves as the development-specific configuration. 
+
+In addition, the docker-compose.ci.yml file serves as the CI environment-specific configuration, and the docker-compose.prod.yml file serves as the production environment-specific configuration.
+
+To run services on the development environment, we execute this command:
+
+-- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+To see all containers that have been started, we execute the command below to list them:
+
+-- docker-compose -f docker-compose.yml -f docker-compose.dev.yml ps
+
+Run services in the CI environment :
+
+-- docker-compose -f docker-compose.yml -f docker-compose.ci.yml up -d
+
+Run services in the production environment :
+
+-- docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d

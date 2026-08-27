@@ -1,0 +1,36 @@
+Work with Docker in Travis CI
+First, we define the CI requirements as follows:
+
+- The CI should be triggered only when a commit is pushed to the master branch or when a pull request is merged to the master branch.
+- The CI should build a Docker image of the application.
+- Automated tests should run to ensure that new changes don’t break existing features. If a test fails, the build should fail.
+- Finally, if the previous steps succeed, the built Docker image should be pushed to a Docker registry.
+
+There are two external dependencies from the requirements above:
+
+(A) : Docker repository: To push the Docker image to a registry, we need to create an image repository for the image.
+(B) : Access credentials: For the CI to be able to push to a repository, it needs to be authenticated with valid access credentials.
+
+1 - Create a Docker image repository
+2 - Generate a Docker Hub access token
+3 - Create Docker Hub access credentials as GitHub Secrets
+	Click on the project and click the “Project Setting” at the right pane.
+	From the left navigation menu, click “Add environment variables.”
+	Enter DOCKER_USERNAME as the name of the variable and the Docker Hub username as the value.
+	Add another environment variable.
+	Type in DOCKER_TOKEN as the name of the variable, and the Docker access token created earlier as the value.
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- Now define the CI configuration : in this case index.yml
+- Create the DOCKER_TOKEN environment variable
+	In the code above(yaml), we define the env variable DOCKER_USERNAME. So, we also need to define the DOCKER_TOKEN. 
+        Since DOCKER_TOKEN is sensitive data, we need to take a different approach. Therefore, we define it as an environment variable in the repository settings in Travis CI. To do this, we follow the steps below:
+
+	Log in to Travis.
+	Navigate to the repository in question.
+	Choose “Settings” from the “More Options” menu.
+	Click on “Add new variable” in the “Environment Variables” section.
+	Select “master” as the branch name.
+	Type DOCKER_TOKEN as the key and paste the token as the value.
+
+- After defining the DOCKER_TOKEN, a commit or merge to the master branch will trigger a new build.

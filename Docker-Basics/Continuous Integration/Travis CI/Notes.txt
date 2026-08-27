@@ -1,0 +1,35 @@
+Travis CI is a hosted continuous integration service used to build and test software projects hosted on GitHub, Bitbucket, and more. Travis CI uses a YAML syntax to define configurations on how to build a project.
+
+Travis CI configurations are defined in the .travis.yml file at the root folder of our project.
+
+1 - Build
+
+A build is a collection of jobs that run in sequence. When all jobs are completed, we say a build is finished.
+
+2 - Stage
+
+A stage is a group of jobs that run in parallel as part of a sequential build process. We could have a test stage that runs a unit test job, integration test job, and an end-to-end job.
+
+One important thing to note is that stage groups of jobs that run both in parallel and in different stages run sequentially.
+
+3 - Job
+
+A job is an automated process that starts with cloning our repository into a virtual environment and executing a set of instructions (steps) on the
+
+4 - Phase
+
+A phase is a sequential step of a job.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Jobs lifecycle :
+
+As mentioned earlier, a job is a sequence of phases. Basically, we leverage phases to customize how our jobs will be run. The main phases are as follows:
+
+1 - install: This is used to install any required dependencies.
+2 - script: This is used to run the build script.
+3 - before_install: We run this before the install phase.
+4 - before_script: We run this before the script phase.
+5 - after_script: We run this after the script phase.
+6 - after_success: We run this when the build succeeds (for example, building documentation). The result is in the TRAVIS_TEST_RESULT environment variable.
+7 - after_failure: We run this when the build fails (for example, uploading log files). The result is in the TRAVIS_TEST_RESULT environment variable.

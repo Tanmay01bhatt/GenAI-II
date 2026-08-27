@@ -1,0 +1,4 @@
+You can choose whether to apply overrides by specifying which Compose files to use with the -f flag.
+ For example, running docker-compose up reads both docker-compose.yml and docker-compose.override.yml (applying overrides). 
+But running docker-compose -f docker-compose.yml up uses only the base file, ignoring overrides. 
+This way, you control if overrides are applied or not.

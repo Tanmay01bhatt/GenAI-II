@@ -1,0 +1,28 @@
+1 -  Define the requirements for the pipeline
+
+- The pipeline should build a Docker image of the application.
+
+- Automated tests should run to ensure that new changes don’t break existing features. If a test fails, the build should fail.
+
+- Finally, if previous steps succeed, the built Docker image should be pushed to a Docker registry only on the master branch.
+
+There are two external dependencies from the requirements above:
+
+(A) -  The Docker repository: To push the Docker image to a registry, we need to create an image repository for the image.
+(B) - Access credentials: For the GitLab CI to be able to push to a repository, it needs to be authenticated with valid credentials.
+
+2 - Create a Docker image repository
+
+3 - Generate a Docker Hub access token
+
+4 - Define Docker Hub access credentials as environment variables in Gitlab
+
+	On Gitlab, we go to the project’s “Settings” and then “CI/CD.”
+	Expand the “Variables” section.
+	Select the “Add Variable” button and fill in the details.
+	Type in DOCKER_USERNAME as the key and the Docker username as the value.
+	Add another variable.
+	Type in DOCKER_TOKEN as the key and paste the Docker token we generated earlier as the value.
+
+5 - Creating a pipeline
+Create a gitlab-ci.yml file at the root folder of the repository
