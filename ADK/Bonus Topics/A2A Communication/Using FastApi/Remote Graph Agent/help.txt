@@ -1,0 +1,11 @@
+RUN:
+- cd langgraph_agent
+- langgraph dev --port 8001
+
+remote agent is running at: http://localhost:8001
+
+The A2A endpoint for the graph will be under: http://localhost:8001/a2a/research_agent
+
+Agent Card :
+
+- http://localhost:8001/a2a/research_agent/.well-known/agent-card.json
